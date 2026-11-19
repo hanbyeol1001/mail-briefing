@@ -114,7 +114,7 @@ def test_scrub_event_drops_everything_not_allowed():
 def test_cron_check_in_survives_scrub(sent):
     from sentry_sdk.crons import monitor
 
-    config = {"schedule": {"type": "crontab", "value": "30 7 * * 1-6"}, "timezone": "Asia/Ho_Chi_Minh"}
+    config = {"schedule": {"type": "crontab", "value": "30 7 * * 1-6"}, "timezone": "UTC"}
 
     @monitor(monitor_slug="mail-briefing-user-1", monitor_config=config)
     def job():

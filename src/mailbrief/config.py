@@ -88,6 +88,7 @@ class Site:
     alert_words: tuple[str, ...]
     exclude_senders: tuple[str, ...]
     exclude_subjects: tuple[str, ...]
+    timezone: str  # Sentry 출석부가 '월~토 07:50' 을 셀 시간대 (IANA 이름)
 
 
 def load_site() -> Site:
@@ -98,6 +99,7 @@ def load_site() -> Site:
         alert_words=tuple(w.lower() for w in _list(values.get("ALERT_WORDS", ""))),
         exclude_senders=_list(values.get("EXCLUDE_SENDERS", "")),
         exclude_subjects=_list(values.get("EXCLUDE_SUBJECTS", "")),
+        timezone=values.get("TIMEZONE", "") or "UTC",
     )
 
 

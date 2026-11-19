@@ -19,7 +19,7 @@ from sentry_sdk.crons import monitor
 from sentry_sdk.transport import Transport
 
 from mailbrief import __version__, diagnostics
-from mailbrief.config import load_config
+from mailbrief.config import SITE, load_config
 from mailbrief.monitoring import SafeError, init_sentry, report_safe, stage
 
 # 가짜 업무 데이터. sentry-test 에서 이 문자열이 Sentry 에 나타나면 거르기가 실패한 것.
@@ -30,7 +30,7 @@ FAKE_SENDER = "secret.sender@example.com"
 def _monitor_config() -> dict:
     return {
         "schedule": {"type": "crontab", "value": "50 7 * * 1-6"},  # 월~토 07:50
-        "timezone": "Asia/Ho_Chi_Minh",
+        "timezone": SITE.timezone,  # .env 의 TIMEZONE
         "checkin_margin": 10,  # 분. 08:00 까지 시작 안 하면 '누락'
         "max_runtime": 30,  # 분. 30분 넘게 걸리면 '시간 초과'
     }
