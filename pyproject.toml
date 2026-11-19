@@ -1,6 +1,6 @@
 [project]
 name = "mailbrief"
-version = "0.2.2"
+version = "1.0.0"
 description = "사내 그룹웨어 메일 브리핑 봇 (Sentry 실습)"
 requires-python = ">=3.12"
 dependencies = [
