@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+build/
+dist/
+*.spec
+.pytest_cache/
+
+# 민감 정보: 절대 커밋 금지
+.env
+data/
+
+# 배포 빌드 때 생성 (Sentry DSN)
+src/mailbrief/_bundled.py
