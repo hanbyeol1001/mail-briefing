@@ -29,9 +29,9 @@ FAKE_SENDER = "secret.sender@example.com"
 
 def _monitor_config() -> dict:
     return {
-        "schedule": {"type": "crontab", "value": "30 7 * * 1-6"},  # 월~토 07:30
+        "schedule": {"type": "crontab", "value": "50 7 * * 1-6"},  # 월~토 07:50
         "timezone": "Asia/Ho_Chi_Minh",
-        "checkin_margin": 10,  # 분. 07:40 까지 시작 안 하면 '누락'
+        "checkin_margin": 10,  # 분. 08:00 까지 시작 안 하면 '누락'
         "max_runtime": 30,  # 분. 30분 넘게 걸리면 '시간 초과'
     }
 
@@ -51,7 +51,8 @@ def cmd_run(args: argparse.Namespace) -> int:
         run_briefing(headless=not args.show_browser, use_summary=not args.no_summary, use_notify=not args.no_notify)
 
     try:
-        if enabled and not args.no_cron:
+        # 출석부(Cron)에는 작업 스케줄러 실행만 적는다. 손으로 돌린 실행까지 적으면 dev 환경 모니터가 생겨 매일 '누락'이 뜬다.
+        if enabled and args.scheduled and not args.no_cron:
             monitored = monitor(monitor_slug=f"mail-briefing-{config.user_alias}", monitor_config=_monitor_config())(pipeline)
             monitored()
         else:

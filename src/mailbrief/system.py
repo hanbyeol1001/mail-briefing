@@ -48,11 +48,11 @@ def register_task() -> str:
     q = lambda s: "'" + s.replace("'", "''") + "'"  # noqa: E731
     _ps(
         f"$a = New-ScheduledTaskAction -Execute {q(exe)} -Argument {q(args)} -WorkingDirectory {q(workdir)};"
-        "$t = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday,Saturday -At 07:30;"
+        "$t = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday,Saturday -At 07:50;"
         "$s = New-ScheduledTaskSettingsSet -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 40)"
         " -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries;"
         f"Register-ScheduledTask -TaskName {q(TASK_NAME)} -Action $a -Trigger $t -Settings $s -Force"
-        " -Description '월~토 07:30 메일 브리핑' | Out-Null"
+        " -Description '월~토 07:50 메일 브리핑' | Out-Null"
     )
     return _ps(f"(Get-ScheduledTaskInfo -TaskName {q(TASK_NAME)}).NextRunTime.ToString('yyyy-MM-dd HH:mm')")
 

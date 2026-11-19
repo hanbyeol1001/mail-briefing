@@ -2,7 +2,7 @@
 
   🚨 회신 필요  : 종류가 '회신'이고 아직 회신 안 한 요청. 기한이 지난 것은 뺀다.
   👀 확인·검토  : 종류가 '검토'(회신 불필요). 기한이 있으면 기한까지, 없으면 받은 날부터 3근무일까지.
-  📬 새로 온 메일: 지난 브리핑 이후(24시간, 월요일은 토요일 07:30 이후) 받은 메일.
+  📬 새로 온 메일: 지난 브리핑 이후(24시간, 월요일은 토요일 07:50 이후) 받은 메일.
 
 기한 없는 '회신' 요청도 확인·검토와 같은 기간(3근무일) 동안 회신 필요 칸에 보여 준다.
 """
@@ -27,7 +27,7 @@ LATEST_COUNTS = BRIEFING_DIR / "최신_개수.json"
 SETTINGS_PATH = SETTINGS_JSON
 WORKDAYS = {0, 1, 2, 3, 4, 5}  # 월~토
 NO_DEADLINE_WORKDAYS = 3
-RUN_TIME = time(7, 30)
+RUN_TIME = time(7, 50)
 
 # 회사에서 늘 빼는 메일 (설정의 EXCLUDE_SENDERS / EXCLUDE_SUBJECTS). 설정 창에서 더 넣을 수 있다.
 DEFAULT_EXCLUDE = {"senders": list(SITE.exclude_senders), "subject_keywords": list(SITE.exclude_subjects)}
@@ -110,7 +110,7 @@ def add_workdays(start: date, n: int) -> date:
 
 
 def new_mail_since(now: datetime) -> datetime:
-    if now.weekday() == 0:  # 월요일: 토요일 07:30 이후
+    if now.weekday() == 0:  # 월요일: 토요일 07:50 이후
         return datetime.combine(now.date() - timedelta(days=2), RUN_TIME)
     return now - timedelta(hours=24)
 

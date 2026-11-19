@@ -101,7 +101,7 @@ class Wizard:
         self._step(steps, 0, "account", "그룹웨어 계정 입력", "Windows 자격 증명 관리자에만 저장", "입력", self.on_account)
         self._step(steps, 1, "login", "로그인 시험", "그룹웨어에 들어가지는지 확인", "시험", self.on_login)
         self._step(steps, 2, "ai", "그래픽카드·로컬 AI 확인", "요약용 AI 를 이 PC 에 준비", "확인", self.on_ai)
-        self._step(steps, 3, "task", "자동 실행 등록", "월~토 07:30 에 저절로 브리핑", "등록", self.on_task)
+        self._step(steps, 3, "task", "자동 실행 등록", "월~토 07:50 에 저절로 브리핑", "등록", self.on_task)
         self._step(steps, 4, "trial", "메일 조회하기", "메일을 읽고 브리핑을 만들어요", "조회", self.on_trial, last=True)
 
         # 도구
@@ -327,7 +327,7 @@ class Wizard:
 
         if done:
             self.setup_title.config(text="✓ 처음 설정 끝", foreground=self.colors.ok)
-            self.setup_hint.config(text="시험 프로필이라 자동 실행은 없어요" if PROFILE else "월~토 07:30 에 저절로 브리핑해요")
+            self.setup_hint.config(text="시험 프로필이라 자동 실행은 없어요" if PROFILE else "월~토 07:50 에 저절로 브리핑해요")
             self.setup_toggle.pack(side="right")
             if self.steps_outer.winfo_manager():
                 self.toggle_setup()
@@ -484,7 +484,7 @@ class Wizard:
             with stage("setup"):
                 next_run = system.register_task()
             self.set_status("task", "등록됨", True)
-            self.log(f"작업 스케줄러에 '{system.TASK_NAME}' 을 등록했습니다. 월~토 07:30 에 실행됩니다 (다음 실행 {next_run}).")
+            self.log(f"작업 스케줄러에 '{system.TASK_NAME}' 을 등록했습니다. 월~토 07:50 에 실행됩니다 (다음 실행 {next_run}).")
             self.check_setup()
 
         self.background(job, "task")
